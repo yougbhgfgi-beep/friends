@@ -14,7 +14,8 @@ const MIME = {
   '.json': 'application/json',
 };
 http.createServer((req, res) => {
-  let fp = path.join(ROOT, req.url === '/' ? 'index.html' : decodeURIComponent(req.url));
+  const url = req.url.split('?')[0];
+  let fp = path.join(ROOT, url === '/' ? 'index.html' : decodeURIComponent(url));
   const ext = path.extname(fp);
   fs.readFile(fp, (err, data) => {
     if (err) {
